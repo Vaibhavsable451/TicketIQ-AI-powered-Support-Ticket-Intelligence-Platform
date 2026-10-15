@@ -33,7 +33,8 @@ def _embeddings_available() -> bool:
     try:
         import sentence_transformers  # noqa: F401
         return True
-    except ImportError:
+    except Exception:
+        # Catches ImportError AND runtime crashes (e.g. pyarrow AttributeError on Python 3.14)
         return False
 
 

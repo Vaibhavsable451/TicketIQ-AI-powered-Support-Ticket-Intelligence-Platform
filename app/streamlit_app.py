@@ -11,6 +11,16 @@ from src.config import DATA_PROCESSED, FIG_DIR, GROQ_API_KEY, LANGSMITH_API_KEY,
 st.set_page_config(page_title="TicketIQ", page_icon="🎫", layout="wide")
 st.title("🎫 TicketIQ - Support Ticket Intelligence")
 
+@st.cache_resource(show_spinner="First launch: training models (about 1-2 minutes)...")
+def ensure_models():
+    """Streamlit Cloud starts with an empty models/ folder, so train once on first launch."""
+    if not (MODELS_DIR / "classifier.joblib").exists():
+        from src.pipeline import run
+        run(skip_deep=True)
+    return True
+
+
+ensure_models()
 ready = (MODELS_DIR / "classifier.joblib").exists()
 with st.sidebar:
     st.header("System status")

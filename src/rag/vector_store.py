@@ -1,4 +1,4 @@
-"""Vector store: Pinecone (serverless) when PINECONE_API_KEY is set, otherwise in-memory fallback."""
+"""Vector store: Pinecone (serverless) when PINECONE_API_KEY is set, otherwise in-memory / TF-IDF fallback."""
 import time
 from functools import lru_cache
 from langchain_core.documents import Document
@@ -14,7 +14,33 @@ def get_embeddings():
     return HuggingFaceEmbeddings(model_name=EMBED_MODEL, encode_kwargs={"normalize_embeddings": True})
 
 
+class TfidfStore:
+    """Dependency-free fallback retriever used when sentence-transformers is not installed (e.g. Streamlit Cloud)."""
+
+    def __init__(self, chunks):
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        self.chunks = chunks
+        self.vec = TfidfVectorizer(ngram_range=(1, 2), stop_words="english")
+        self.M = self.vec.fit_transform([c.page_content for c in chunks])
+
+    def similarity_search(self, query, k=3):
+        from sklearn.metrics.pairwise import cosine_similarity
+        sims = cosine_similarity(self.vec.transform([query]), self.M)[0]
+        return [self.chunks[i] for i in sims.argsort()[::-1][:k]]
+
+
+def _embeddings_available() -> bool:
+    try:
+        import sentence_transformers  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 def load_chunks():
+    if not list(KB_DIR.glob("*.md")):
+        from src.data.collect import write_knowledge_base
+        write_knowledge_base()
     docs = []
     for p in sorted(KB_DIR.glob("*.md")):
         docs.append(Document(page_content=p.read_text(), metadata={"source": p.name, "topic": p.stem}))
@@ -37,7 +63,11 @@ def _pinecone_index_ready(pc):
 
 def ingest():
     """Upsert KB chunks (idempotent: deterministic ids). Returns the vector store."""
-    chunks, emb = load_chunks(), get_embeddings()
+    chunks = load_chunks()
+    if not _embeddings_available():
+        log.info("sentence-transformers not installed -> using TF-IDF retriever")
+        return TfidfStore(chunks)
+    emb = get_embeddings()
     if PINECONE_API_KEY:
         from pinecone import Pinecone
         from langchain_pinecone import PineconeVectorStore
@@ -54,7 +84,7 @@ def ingest():
 
 @lru_cache(maxsize=1)
 def get_vector_store():
-    if PINECONE_API_KEY:
+    if PINECONE_API_KEY and _embeddings_available():
         from pinecone import Pinecone
         from langchain_pinecone import PineconeVectorStore
         if _pinecone_index_ready(Pinecone(api_key=PINECONE_API_KEY)):

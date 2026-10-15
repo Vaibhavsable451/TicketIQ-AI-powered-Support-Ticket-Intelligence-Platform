@@ -30,11 +30,19 @@ class TfidfStore:
 
 
 def _embeddings_available() -> bool:
+    """Check without triggering the full (broken) import chain."""
     try:
-        import sentence_transformers  # noqa: F401
+        from importlib.util import find_spec
+        # torch is required for sentence-transformers to function;
+        # if it's missing we already know embeddings won't work.
+        if find_spec("torch") is None:
+            return False
+        if find_spec("sentence_transformers") is None:
+            return False
+        # Both packages exist – do a real import of torch to be sure it loads.
+        import torch  # noqa: F401
         return True
     except Exception:
-        # Catches ImportError AND runtime crashes (e.g. pyarrow AttributeError on Python 3.14)
         return False
 
 

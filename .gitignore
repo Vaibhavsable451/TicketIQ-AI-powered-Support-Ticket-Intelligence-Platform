@@ -1,6 +1,7 @@
 .env
 __pycache__/
 .venv/
-models/
+# Ignore trained model artifacts but NOT src/models/ source code
+/models/
 data/raw/
 .ipynb_checkpoints/

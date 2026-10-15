@@ -1,0 +1,25 @@
+{"node": "classify", "status": "ok", "latency_ms": 515.1, "ts": "2026-10-15T04:50:41.949597+00:00"}
+{"node": "retrieve", "status": "ok", "latency_ms": 35876.4, "ts": "2026-10-15T04:51:17.831445+00:00"}
+{"node": "draft", "status": "ok", "latency_ms": 2368.5, "ts": "2026-10-15T04:51:20.206920+00:00"}
+{"node": "verify", "status": "ok", "latency_ms": 786.6, "ts": "2026-10-15T04:51:20.999862+00:00"}
+{"node": "escalate", "status": "ok", "latency_ms": 0.0, "ts": "2026-10-15T04:51:21.004998+00:00"}
+{"node": "request", "status": "escalated", "category": "billing", "confidence": 0.9879804306439418, "ticket_len": 52, "ts": "2026-10-15T04:51:21.007014+00:00"}
+{"node": "classify", "status": "ok", "latency_ms": 747.9, "ts": "2026-10-15T04:54:23.462610+00:00"}
+{"node": "retrieve", "status": "ok", "latency_ms": 27746.7, "ts": "2026-10-15T04:54:51.226188+00:00"}
+{"node": "draft", "status": "ok", "latency_ms": 2370.7, "ts": "2026-10-15T04:54:53.606975+00:00"}
+{"node": "verify", "status": "ok", "latency_ms": 788.9, "ts": "2026-10-15T04:54:54.397161+00:00"}
+{"node": "respond", "status": "ok", "latency_ms": 0.0, "ts": "2026-10-15T04:54:54.397161+00:00"}
+{"node": "request", "status": "answered", "category": "billing", "confidence": 0.9879804306439418, "ticket_len": 52, "ts": "2026-10-15T04:54:54.406760+00:00"}
+{"node": "classify", "status": "ok", "latency_ms": 49.7, "ts": "2026-10-15T04:55:34.093874+00:00"}
+{"node": "retrieve", "status": "ok", "latency_ms": 358.8, "ts": "2026-10-15T04:55:34.456881+00:00"}
+{"node": "draft", "status": "ok", "latency_ms": 1241.7, "ts": "2026-10-15T04:55:35.712234+00:00"}
+{"node": "verify", "status": "ok", "latency_ms": 869.7, "ts": "2026-10-15T04:55:36.582644+00:00"}
+{"node": "respond", "status": "ok", "latency_ms": 0.0, "ts": "2026-10-15T04:55:36.590527+00:00"}
+{"node": "request", "status": "answered", "category": "billing", "confidence": 0.9879804306439418, "ticket_len": 52, "ts": "2026-10-15T04:55:36.600763+00:00"}
+{"node": "enrich", "status": "ok", "latency_ms": 0.3, "ts": "2026-10-15T05:17:00.313819+00:00"}
+{"node": "classify", "status": "ok", "latency_ms": 8638.0, "ts": "2026-10-15T05:17:09.039563+00:00"}
+{"node": "retrieve", "status": "ok", "latency_ms": 34934.8, "ts": "2026-10-15T05:17:43.987135+00:00"}
+{"node": "draft", "status": "ok", "latency_ms": 2485.9, "ts": "2026-10-15T05:17:46.480098+00:00"}
+{"node": "verify", "status": "ok", "latency_ms": 785.8, "ts": "2026-10-15T05:17:47.269802+00:00"}
+{"node": "respond", "status": "ok", "latency_ms": 0.0, "ts": "2026-10-15T05:17:47.275043+00:00"}
+{"node": "request", "status": "answered", "category": "billing", "confidence": 0.9879804306439418, "ticket_len": 52, "ts": "2026-10-15T05:17:47.279062+00:00"}

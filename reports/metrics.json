@@ -1,0 +1,77 @@
+{
+  "classification": [
+    {
+      "model": "GradientBoosting",
+      "accuracy": 0.9925,
+      "f1_macro": 0.9925768550640578,
+      "train_sec": 20.5
+    },
+    {
+      "model": "LogisticRegression",
+      "accuracy": 0.98625,
+      "f1_macro": 0.9846283396187939,
+      "train_sec": 0.11
+    },
+    {
+      "model": "RandomForest",
+      "accuracy": 0.9775,
+      "f1_macro": 0.9775745013048874,
+      "train_sec": 0.98
+    },
+    {
+      "model": "SVM (RBF)",
+      "accuracy": 0.97,
+      "f1_macro": 0.9688343153581058,
+      "train_sec": 13.81
+    },
+    {
+      "model": "DecisionTree",
+      "accuracy": 0.9675,
+      "f1_macro": 0.9660140620709896,
+      "train_sec": 0.17
+    },
+    {
+      "model": "KNN",
+      "accuracy": 0.70125,
+      "f1_macro": 0.6868139159465994,
+      "train_sec": 0.0
+    }
+  ],
+  "regression": [
+    {
+      "model": "GradientBoosting",
+      "mae": 5.116916924160097,
+      "rmse": 8.000917343531203,
+      "r2": 0.8189190901001784,
+      "train_sec": 6.61
+    },
+    {
+      "model": "LinearRegression",
+      "mae": 5.262311282552108,
+      "rmse": 8.09189609382775,
+      "r2": 0.8147775197384661,
+      "train_sec": 0.56
+    },
+    {
+      "model": "Ridge",
+      "mae": 5.2896365515078925,
+      "rmse": 8.180714839065597,
+      "r2": 0.8106891047207704,
+      "train_sec": 0.06
+    },
+    {
+      "model": "RandomForest",
+      "mae": 5.428671261323271,
+      "rmse": 8.546876759690155,
+      "r2": 0.7933630494835767,
+      "train_sec": 38.19
+    }
+  ],
+  "priority": {
+    "model": "Priority LogReg",
+    "accuracy": 0.82,
+    "f1_macro": 0.8312100526109831
+  },
+  "best_classifier": "GradientBoosting",
+  "best_regressor": "GradientBoosting"
+}
